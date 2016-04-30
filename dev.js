@@ -6,8 +6,12 @@ const path           = require('path');
 
 app.use('/client', express.static(path.join(__dirname, '/client')));
 
-app.get('/', function(req, res){
+app.get('/url-graph', function(req, res){
   res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/punch-dates', function(req, res){
+  res.sendFile(__dirname + '/visualization/punch-dates.html');
 });
 
 const server = require('http').Server(app);
