@@ -38,3 +38,25 @@ Graphics.scatter = function(){
     render: plot
   };
 };
+
+Graphics.punch = function(){
+  function plot(target, data){
+    
+  };
+
+  function enhance(series){
+    series = _.map(series, function(data){
+      var date = moment(data.date);
+      return _.merge(data, {
+        date: date.toDate(),
+        day: date.day(),
+        hours: date.hours()
+      });
+    });
+    return series;
+  };
+
+  return {
+    render: plot
+  };
+};
