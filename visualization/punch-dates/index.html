@@ -5,7 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
+      #punchcard .tick {
+        fill: black;
+      };
 
+      #punchcard .axis path,
+      #punchcard .axis line {
+          fill: none;
+          stroke: #eee;
+          shape-rendering: crispEdges;
+      }
+
+      #punchcard .axis text {
+          font-family: sans-serif;
+          font-size: 11px;
+      }
+
+      #punchcard .loading {
+          font-family: sans-serif;
+          font-size: 15px;
+      }
+
+      #punchcard .circle {
+          fill: #222;
+      }
     </style>
   </head>
 
@@ -13,6 +36,9 @@
     <div style="width: 600px; margin: auto;">
       <div id="scatter" style="height: 400px;"></div>
     </div>
+    <!--<div class="punchcard" style="max-width: 600px; margin-top: 40px;">
+      <div id="punchcard"></div>
+    </div>-->
   </body>
 
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.8.0/metricsgraphics.min.css">
@@ -26,9 +52,11 @@
   <script>
     jQuery(document).ready(function(){
       var Scatter = Graphics.scatter();
+      //var Punchcard = Graphics.punchcard();
 
       jQuery.getJSON('/punch-dates/data.json', function(data){
         Scatter.render('#scatter', data);
+        //Punchcard.render('#punchcard', data);
       });
     });
   </script>

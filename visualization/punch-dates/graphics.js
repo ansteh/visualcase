@@ -18,6 +18,7 @@ Graphics.scatter = function(){
       },
       x_accessor: 'meetings',
       y_accessor: 'bri',
+      min_y: 120,
       //color_accessor:'z',
       color_range: ['white','yellow'],
       size_accessor:'w',
@@ -39,9 +40,14 @@ Graphics.scatter = function(){
   };
 };
 
-Graphics.punch = function(){
+Graphics.punchcard = function(){
   function plot(target, data){
-    
+
+    var input = _.map(enhance(data), function(point){
+      return [point.day, point.hours, point.bri];
+    });
+    console.log(input);
+    //draw(input);
   };
 
   function enhance(series){
