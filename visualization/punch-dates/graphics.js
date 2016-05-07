@@ -7,15 +7,12 @@ Graphics.scatter = function(options){
     height: 400,
     right: 10,
     target: options.target,
-    xax_format: function(f) {
-        var pf = d3.formatPrefix(f);
-        return Math.round(pf.scale(f)) + pf.symbol;
-    },
     min_y: 120,
-    //color_accessor:'z',
-    color_range: ['white','yellow'],
+    color_accessor:'z',
+    color_range: ['#000', 'yellow'],
     //x_rug: true,
-    y_rug: true
+    y_rug: true,
+    //least_squares: true
   };
 
   function render(data){
@@ -55,10 +52,17 @@ Graphics.hours = function(target){
   function enhance(series){
     series = _.map(series, function(data){
       var date = moment(data.date);
+      var fixedDate = moment({
+        hour: date.hour(),
+        minute: date.minute(),
+        seconds: date.seconds()
+      }).toDate();
+
       return _.merge(data, {
         date: date.toDate(),
         day: date.day(),
-        hours: date.hours()
+        hours: date.hours(),
+        fixedDate: fixedDate
       });
     });
     return series;
@@ -68,7 +72,7 @@ Graphics.hours = function(target){
     target: target,
     title: "Bri vs Hours",
     enhance: enhance,
-    x_accessor: 'hours',
+    x_accessor: 'fixedDate',
     y_accessor: 'bri',
     size_accessor:'w'
   };
